@@ -1,8 +1,10 @@
 import React from 'react';
+import PetDetailPage from './petDetailPage';
+
 
 function App() {
   return (
-    <h1> Hello </h1>
+    <PetDetailPage></PetDetailPage>
   );
 }
 
