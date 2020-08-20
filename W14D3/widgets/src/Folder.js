@@ -1,35 +1,8 @@
 import React from 'react';
 
-// const Headers = ({ titles, currentTab, selectTab }) => {
-//     return (
-//       <ul className='tab-header'>
-//         {titles.map((title, idx) => {
-//           return (
-//             <li key={idx} onClick={currentTab}>
-//               {title}
-//             </li>
-//           );
-//         })}
-//       </ul>
-//     );
-//   }
+import Headers from "./Headers"
 
 
-const Headers = ({ folder.titles, currentTab, selectTab }) => {
-    const tabs = titles.map((title, idx) => {
-        return (
-            <li key={idx}>
-            {title}
-            </li>
-        );
-    })
-
-    return (
-        <ul className='tab-header'>
-        {tabs}
-        </ul>
-    );
-}
 
 class Folder extends React.Component {
     constructor(props) {
@@ -40,20 +13,29 @@ class Folder extends React.Component {
     }
 
     selectTab = (idx) => {
-
+        this.setState({ currentTab: idx});
     }
+
 
     render() {
         const folder = this.props.folders[this.state.currentTab];
-        // const {title} = this.props;
+        const titles = [];
+        this.props.folders.forEach(folder => titles.push(folder["title"]))
+
         return(
             <div>
                 <h1>Folder</h1>
                 <div className="tabs">
-                    {Headers(this.props)}
-                    <div>
-                        {folder.content}
+                    <div className="tab-header">
+                        <Headers
+                            titles={titles}
+                            currentTab={this.state.currentTab}
+                            selectTab={this.selectTab}
+                        />
                     </div>
+                        <div className="tab-content">
+                            <div>{folder.content}</div>
+                        </div>
                 </div>
             </div>
         )

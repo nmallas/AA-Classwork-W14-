@@ -4,6 +4,7 @@ import Clock from './Clock';
 
 import Folder from './Folder';
 
+import Weather from './Weather';
 
 const folders = [
   {title: 'one', content: 'I am the first'},
@@ -14,7 +15,9 @@ const folders = [
 const Root = () => {
   return (
     <div>
-      <Clock/> <Folder folders={folders}/>
+      <Clock/>
+      <Folder folders={folders}/>
+      <Weather/>
     </div>
   )
 }
