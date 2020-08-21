@@ -1,0 +1,6 @@
+.bf {
+    background-image: url('./bf.jpg');
+    width: 300px;
+    height: 168px;
+    background-size: cover;
+}
