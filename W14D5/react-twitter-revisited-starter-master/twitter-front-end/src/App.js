@@ -1,12 +1,12 @@
 import React from 'react';
 import {Route, Switch, NavLink} from "react-router-dom";
-import RegistrationForm from './components/session/RegistrationForm';
 import Home from './components/Home';
 import LogInForm from './components/session/LogInForm';
 import Profile from './components/Profile';
 import {ProtectedRoute, AuthRoute} from "./Routes";
+import RegistrationFormWithContext from './components/session/RegistrationForm';
 
-function App() {
+function App(props) {
   return (
     <>
       <nav>
@@ -15,10 +15,10 @@ function App() {
         <NavLink to="/login" > Login </NavLink>
       </nav>
       <Switch>
-        <AuthRoute path="/register" component={RegistrationForm} />
-        <AuthRoute path="/login" component={LogInForm} />
-        <ProtectedRoute path="/users/:userId" component={Profile} />
-        <ProtectedRoute exact path="/" component={Home} />
+        <AuthRoute path="/register" currentUserId={props.currentUserId} component={RegistrationFormWithContext} />
+        <AuthRoute path="/login" currentUserId={props.currentUserId} component={LogInForm} />
+        <ProtectedRoute path="/users/:userId" currentUserId={props.currentUserId} component={Profile} />
+        <ProtectedRoute exact path="/" currentUserId={props.currentUserId} component={Home} />
         {/* <Route path="/register" component={RegistrationForm} />
         <Route path="/login" component={LogInForm} />
         <Route path="/users/:userId" component={Profile} />
