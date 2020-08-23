@@ -1,5 +1,6 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
+import NameContext from "./NameContext";
 
 const Navigation = () => {
     return (
@@ -17,6 +18,9 @@ const Navigation = () => {
             </li>
           </ul>
         </nav>
+        <NameContext.Consumer>
+            {value => <div>Hello {value.name} </div>}
+        </NameContext.Consumer>
       </header>
     )
 }
