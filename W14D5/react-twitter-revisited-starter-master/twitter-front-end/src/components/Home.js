@@ -5,7 +5,7 @@ class Home extends React.Component {
         super(props);
     }
 
-    async ComponentDidMount() {
+    async componentDidMount() {
 
     }
 
