@@ -32,7 +32,7 @@ class RegistrationForm extends React.Component {
             if(res.ok) {
                 let data = await res.json();
                 const {user: {id}, token} = data;
-                this.props.updateContext(token, id);
+                this.props.login(token, id);
             } else {
                 throw res;
             }
@@ -75,7 +75,7 @@ class RegistrationForm extends React.Component {
 const RegistrationFormWithContext = () => {
     return (
         <UserContext.Consumer>
-            {value =>  <RegistrationForm updateContext={value.updateContext} props={value} />}
+            {value =>  <RegistrationForm login={value.login} props={value} />}
         </UserContext.Consumer>
     )
 }

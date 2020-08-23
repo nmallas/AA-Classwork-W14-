@@ -23,15 +23,22 @@ class AppWithContext extends React.Component {
         this.state = {
             authToken: authToken || null,
             currentUserId: currentUserId,
-            updateContext: this.updateContext
+            login: this.login
         };
     }
 
-    updateContext = (authToken, currentUserId) => {
+    login = (authToken, currentUserId) => {
         this.setState({ authToken, currentUserId }, () => {
           console.log(this.state);
         });
     }
+
+    logout = () => {
+        this.setState({ authToken: null, currentUserId: null }, () => {
+          console.log(this.state);
+          Cookies.remove('token');
+        });
+      }
 
     render() {
         return (
