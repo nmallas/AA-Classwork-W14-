@@ -36,7 +36,7 @@ const deleteTask = (taskId) => {
     }
 }
 
-const resetTaskerList = () => {
+const resetTaskList = () => {
     return {
         type: RESET_TASK_LIST,
         emptyTaskList: [],
@@ -47,5 +47,5 @@ module.exports = {
     store,
     createTask,
     deleteTask,
-    resetTaskerList
+    resetTaskList
 }

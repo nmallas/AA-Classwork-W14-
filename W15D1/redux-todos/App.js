@@ -22,3 +22,8 @@ store.dispatch(deleteTask(0));
 
 console.log('Updated Redux Store:');
 console.log(store.getState())
+
+store.dispatch(resetTaskList());
+
+console.log('Reset Redux Store (empty task list):');
+console.log(store.getState());
