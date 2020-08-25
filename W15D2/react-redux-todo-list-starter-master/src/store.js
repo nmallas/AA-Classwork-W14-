@@ -9,6 +9,8 @@ const preloadedState = loadState();
 const store = createStore(tasksReducer, preloadedState);
 // TODO: Subscribe to store changes and save the state upon each change
 store.subscribe(() => {
-    saveState(store);
+    saveState(store.getState());
     console.log(store.getState());
 })
+
+export default store;

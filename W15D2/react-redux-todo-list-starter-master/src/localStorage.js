@@ -3,7 +3,8 @@ const STATE_KEY = 'tasks';
 export const loadState = () => {
   try {
     let tasks = localStorage.getItem(STATE_KEY);
-    return tasks ? JSON.parse(tasks) : undefined;
+    console.log(tasks);
+    return (tasks ? JSON.parse(tasks) : undefined);
   } catch(e) {
     console.warn(e);
     return undefined;
@@ -12,7 +13,7 @@ export const loadState = () => {
 
 export const saveState = (state) => {
   try {
-    localStorage.setItem(STATE_KEY, state);
+    localStorage.setItem(STATE_KEY, JSON.stringify(state));
   } catch (e) {
     console.warn(e);
   }
