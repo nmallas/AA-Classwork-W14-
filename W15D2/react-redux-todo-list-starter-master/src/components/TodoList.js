@@ -1,7 +1,8 @@
 import React from 'react';
 import Task from './Task';
 import store from "../store";
-import {deleteTask} from "../actions/taskActions";
+import {deleteTask, resetTaskList} from "../actions/taskActions";
+import TaskReset from './TaskReset';
 
 
 class TodoList extends React.Component {
@@ -17,18 +18,25 @@ class TodoList extends React.Component {
       store.dispatch(deleteTask(id));
   }
 
+  resetTaskList = () => {
+    store.dispatch(resetTaskList());
+  }
+
   render() {
       let tasks = store.getState();
-      if(!tasks) {
+      let taskArray = Object.values(tasks);
+      if(!tasks || !taskArray.length) {
         return null;
       } else {
-        let taskArray = Object.values(tasks);
         return (
-          <ul>
-            {
-              taskArray.map(task => <Task key={task.id} task={task} deleteTask={this.deleteTask}></Task>)
-            }
-          </ul>
+          <>
+            <ul>
+              {
+                taskArray.map(task => <Task key={task.id} task={task} deleteTask={this.deleteTask}></Task>)
+              }
+            </ul>
+            <TaskReset resetTaskList={this.resetTaskList}/>
+          </>
         );
       }
   }

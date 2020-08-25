@@ -1,5 +1,6 @@
 export const CREATE_TASK = `CREATE_TASK`;
 export const DELETE_TASK = `DELETE_TASK`;
+export const RESET_TASKS = `RESET_TASKS`;
 
 // TODO: Define `createTask` action creator function
 export const createTask = (taskMessage) => {
@@ -14,5 +15,11 @@ export const deleteTask = (taskId) => {
     return {
         type: DELETE_TASK,
         taskId
+    }
+}
+
+export const resetTaskList = () => {
+    return {
+        type: RESET_TASKS
     }
 }

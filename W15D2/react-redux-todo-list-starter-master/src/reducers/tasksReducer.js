@@ -1,4 +1,4 @@
-import {CREATE_TASK, DELETE_TASK} from "../actions/taskActions";
+import {CREATE_TASK, DELETE_TASK, RESET_TASKS} from "../actions/taskActions";
 
 const tasksReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -11,6 +11,8 @@ const tasksReducer = (state = {}, action) => {
       case DELETE_TASK:
         delete nextState[action.taskId];
         return nextState;
+      case RESET_TASKS:
+        return {};
       default:
         return state;
     }
