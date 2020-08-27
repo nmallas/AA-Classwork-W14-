@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-import LoginPanel from './LoginPanel';
 import PokemonBrowser from './PokemonBrowser';
+import ConnectedLogin from "./LoginPanelRedux";
 
 const PrivateRoute = ({ component: Component, cProps, ...rest }) => (
   <Route {...rest} render={(props) => (
@@ -83,7 +83,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route path="/login"
-            render={props => <LoginPanel {...props} updateUser={this.updateUser} />} />
+            render={props => <ConnectedLogin {...props} />} />
           <PrivateRoute path="/"
                         exact={true}
                         needLogin={this.state.needLogin}
