@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 
 import PokemonBrowser from './PokemonBrowser';
 import ConnectedLogin from "./LoginPanelRedux";
+import LoginPanelRedux from './LoginPanelRedux';
 
 const PrivateRoute = ({ component: Component, cProps, ...rest }) => (
   <Route {...rest} render={(props) => (
@@ -62,14 +63,6 @@ class App extends React.Component {
     }
   }
 
-  updateUser = currentUserId => {
-    this.setState({
-      needLogin: false,
-      currentUserId
-    });
-    this.loadPokemon();
-  }
-
   render() {
     if (!this.state.loaded) {
       return null;
@@ -83,7 +76,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route path="/login"
-            render={props => <ConnectedLogin {...props} />} />
+            component={LoginPanelRedux}/>
           <PrivateRoute path="/"
                         exact={true}
                         needLogin={this.state.needLogin}

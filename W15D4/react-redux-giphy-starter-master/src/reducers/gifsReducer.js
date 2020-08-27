@@ -1,0 +1,13 @@
+// TODO: Import the `RECEIVE_GIFS` constant
+import { RECEIVE_GIFS } from "../actions/gifActions"
+
+const gifsReducer = (state = [], action) => {
+  switch (action.type) {
+    case(RECEIVE_GIFS):
+      return 
+    default:
+      return state;
+  }
+};
+
+export default gifsReducer;
