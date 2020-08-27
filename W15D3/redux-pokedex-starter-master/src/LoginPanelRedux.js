@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import {login} from './store/authentication'
+import {login} from './store/authentication';
+import { Redirect} from "react-router-dom";
 
 
 class LoginPanelRedux extends React.Component {
@@ -25,8 +26,11 @@ class LoginPanelRedux extends React.Component {
     }
 
     render() {
-
+        if(this.props.currentUserId) {
+            return <Redirect to="/" />
+        }
         return (
+
             <main className="centered middled">
               <form onSubmit={this.handleSubmit}>
                 <input type="text"
@@ -45,17 +49,10 @@ class LoginPanelRedux extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    try {
-        console.log(state.authentication.player.id);
-        if(state.authentication.player.id === undefined) {
-            window.location.href("/login");
-        }
+       let playerExists = (!!state.authentication.player);
         return {
-            currentUserId: state.authentication.player.id
+            currentUserId: playerExists ? state.authentication.player.id : false
         }
-    } catch(e) {
-        console.log(e);
-    }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -65,10 +62,6 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-//     handleDelete: (id) => dispatch(deleteTodo(id)),
-//     handleAdd: (msg) => dispatch(addTodo(msg))
-//   });
 
 let connectedLogin = connect(
     mapStateToProps,
