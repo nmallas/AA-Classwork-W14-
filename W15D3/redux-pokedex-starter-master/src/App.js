@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import {connect} from "react-redux";
 
 import PokemonBrowser from './PokemonBrowser';
-import ConnectedLogin from "./LoginPanelRedux";
 import LoginPanelRedux from './LoginPanelRedux';
 
 const PrivateRoute = ({ component: Component, cProps, ...rest }) => (
@@ -93,4 +93,18 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  let playerExists = (!!state.authentication.player);
+    return {
+      currentUserId: playerExists ? state.authentication.player.id : false
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {}
+}
+
+let connectedApp = connect(mapStateToProps, mapDispatchToProps)(App)
+
+
+export default connectedApp;
