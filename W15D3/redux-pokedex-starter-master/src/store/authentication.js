@@ -28,16 +28,14 @@ export const login = (email, password) => async dispatch => {
         }
     }
 
-
-export const logout = () => async dispatch => {
-  const res = await fetch('/api/session', {
-    method: "delete"
-  });
-  if (res.ok) {
-    dispatch(removeUser());
-
+export const logout = () => {
+    return async(dispatch) => {
+      let res = await fetch("/api/session", {
+        method: "delete"
+      });
+      if (res.ok) dispatch(removeUser())
+    }
   }
-}
 
 function loadUser() {
   const authToken = Cookies.get("token");

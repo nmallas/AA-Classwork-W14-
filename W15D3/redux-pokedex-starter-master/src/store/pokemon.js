@@ -9,8 +9,8 @@ const load = (pokemon) => {
 
 const pokemonReducer = (state = {}, action) => {
     switch(action.type) {
-        case(LOAD):
-            return {...state, list: action.pokemon }
+        case LOAD:
+            return { ...state, list: action.pokemon };
         default:
             return state;
     }
