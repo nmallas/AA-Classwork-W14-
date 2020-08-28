@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-import LoginPanel from './LoginPanel';
-import PokemonBrowser from './PokemonBrowser';
+import LoginPanelHooks from './LoginPanelHooks';
+import PokemonBrowserHooks from './PokemonBrowserHooks';
 import { PrivateRoute } from './routesUtil';
 
 class App extends React.Component {
@@ -78,16 +78,16 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route path="/login"
-            render={props => <LoginPanel {...props} updateUser={this.updateUser} />} />
+            render={props => <LoginPanelHooks {...props} updateUser={this.updateUser} />} />
           <PrivateRoute path="/"
                         exact={true}
                         needLogin={needLogin}
-                        component={PokemonBrowser}
+                        component={PokemonBrowserHooks}
                         cProps={cProps} />
           <PrivateRoute path="/pokemon/:pokemonId"
                         exact={true}
                         needLogin={needLogin}
-                        component={PokemonBrowser}
+                        component={PokemonBrowserHooks}
                         cProps={cProps} />
         </Switch>
       </BrowserRouter>
