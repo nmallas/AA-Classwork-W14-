@@ -4,13 +4,13 @@ import App from './App';
 
 const mapStateToProps = state => {
   return {
-    // TODO: Pass `gifs` prop
+    gifs: state.gifs.map(gif => gif.images.fixed_height.url)
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    // TODO: Pass `fetchGifs` prop
+    fetchGifs: (searchTerm) => dispatch(fetchGifs(searchTerm))
   };
 };
 

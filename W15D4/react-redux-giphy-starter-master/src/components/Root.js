@@ -1,10 +1,10 @@
 import React from 'react';
-import App from './App';
 import { Provider } from "react-redux";
+import AppContainer from './AppContainer';
 
 const Root = (props) => (
   <Provider store={props.store}>
-    <App />
+    <AppContainer/>
   </Provider>
 );
 

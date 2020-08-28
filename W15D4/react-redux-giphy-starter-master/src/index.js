@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/Root';
-import {fetchGifs} from "./util/apiUtil";
+import * as APIUtil from './util/apiUtil';
 import configureStore from "./store";
+import { fetchGifs } from "./actions/gifActions"
 
-window.fetchGifs = fetchGifs;
 let store = configureStore();
+window.apiFetchGifs = APIUtil.fetchGifs;
+window.fetchGifs = fetchGifs;
+window.store = store;
+
 
 ReactDOM.render(
   <React.StrictMode>

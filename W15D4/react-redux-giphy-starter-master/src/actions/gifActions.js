@@ -13,8 +13,9 @@ export function receiveGifs(gifs) {
 
 export const fetchGifs = searchTerm => {
     return async (dispatch) => {
-       let response = APIUtil.fetchGifs(searchTerm);
+       let response = await APIUtil.fetchGifs(searchTerm);
        let result = await response.json();
+       console.log(result.data)
        dispatch(receiveGifs(result.data));
     }
 }
