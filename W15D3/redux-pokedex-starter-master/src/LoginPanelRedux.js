@@ -49,10 +49,9 @@ class LoginPanelRedux extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-       let playerExists = (!!state.authentication.player);
-        return {
-            currentUserId: playerExists ? state.authentication.player.id : false
-        }
+    return {
+        currentUserId: state.authentication.id
+      };
 }
 
 const mapDispatchToProps = (dispatch) => {

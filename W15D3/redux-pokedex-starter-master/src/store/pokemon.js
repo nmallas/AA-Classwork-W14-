@@ -1,14 +1,16 @@
 const LOAD = "pokedex/pokemon/LOAD";
 
 const load = (pokemon) => {
-    type: LOAD,
-    pokemon
+    return {
+        type: LOAD,
+        pokemon
+    }
 }
 
-const pokemonReducer = (state = [], action) => {
+const pokemonReducer = (state = {}, action) => {
     switch(action.type) {
         case(LOAD):
-            return [...state, ...action.pokemon]
+            return {...state, list: action.pokemon }
         default:
             return state;
     }
