@@ -12,6 +12,7 @@ export default function LogInPanel(props) {
 
     const handleSubmit = async e => {
         e.preventDefault();
+        debugger;
         const response = await fetch(`/api/session`, {
             method: 'put',
             headers: { 'Content-Type': 'application/json' },
@@ -25,7 +26,8 @@ export default function LogInPanel(props) {
     }
 
     if (currentUserId) {
-      return <Redirect to="/" />;
+        debugger;
+        return <Redirect to="/" />;
     }
     return (
       <main className="centered middled">

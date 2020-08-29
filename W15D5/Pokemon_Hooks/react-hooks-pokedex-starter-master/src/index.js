@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import AppHooks from './AppHooks';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppHooks />
   </React.StrictMode>,
   document.getElementById('root')
 );
