@@ -7,13 +7,12 @@ import PokemonBrowserHooks from './PokemonBrowserHooks';
 import { PrivateRoute } from './routesUtil';
 
 export default function AppHooks() {
-    const [currentUserId, setCurrentUserId] = useState(getCurrentUser());
+    const [currentUserId, setCurrentUserId] = useState();
     const [loaded, setLoaded] = useState(false);
     const [needLogin, setNeedLogin] = useState(!currentUserId);
     const [pokemon, setPokemon] = useState("");
 
     function getCurrentUser() {
-        debugger;
         const authToken = Cookies.get("token");
         if (authToken) {
           try {
@@ -29,11 +28,10 @@ export default function AppHooks() {
     }
 
     useEffect(() => {
-        loadPokemon()
-    }, []);
+      updateUser();
+    }, [currentUserId]);
 
     const updateUser = (currentUserId) => {
-        debugger;
         setNeedLogin(false);
         setCurrentUserId(currentUserId);
         loadPokemon();
