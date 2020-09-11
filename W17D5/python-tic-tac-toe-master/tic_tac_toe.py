@@ -3,6 +3,11 @@ import random
 
 # This function must be completed
 def space_value(board, index):
+    # print(f'{index}\n {board}')
+    if board[index] != " ":
+        return board[index]
+    else:
+        return str(index)
     """
     Get the value for a space in the board.
 
@@ -12,7 +17,7 @@ def space_value(board, index):
     Arguments: board: An array of nine strings index: The value in the board to
     interrogate
     """
-    pass
+    # pass
 
 
 def draw_board(board):
@@ -67,6 +72,7 @@ def make_move(board, letter, move):
 
 # This function must be completed
 def is_winner(board, letter):
+
     """
     Determines if the specified letter is a winner.
 
@@ -83,6 +89,15 @@ def is_space_free(board, move):
 
 # This function must be completed
 def get_player_move(board):
+    player_num = int(input('Pick you spot number 1-8 \n'))
+
+    val = space_value(board, player_num)
+
+    if(val == str(player_num)):
+        return player_num
+    else:
+        print("invalid move, pick another number")
+        get_player_move(board)
     """
     Prompt the player for their move and return their value as an integer.
 
@@ -91,27 +106,37 @@ def get_player_move(board):
     then the function tells the player that is an invalid move and prompts the
     player, again, for a value.
     """
-    pass
+    # pass
 
 
 # This function must be completed
 def get_random_move(board):
+    possible_moves = []
+    for i in range(len(board) - 1):
+        if board[i+1] == " ":
+            possible_moves.append(i+1)
+    random.shuffle(possible_moves)
+    return possible_moves[0]
     """
     Returns a valid random move for the computer from an empty space in the
     board.
 
     To get nice random moves, consider using the random.shuffle method, here.
     """
-    pass
+    # pass
 
 
 # This function must be completed
 def is_board_full(board):
+    if " " not in board[1:]:
+        return True
+    return False
     """
     Return True if every space on the board has been taken. Otherwise return
     False.
     """
-    pass
+    # pass
+
 
 print("Welcome to Tic Tac Toe!")
 
