@@ -3,7 +3,6 @@ import random
 
 # This function must be completed
 def space_value(board, index):
-    # print(f'{index}\n {board}')
     if board[index] != " ":
         return board[index]
     else:
@@ -54,6 +53,10 @@ def get_player_and_computer_letters():
 
 # This function must be completed
 def play_again():
+    again = input('Would you like to play again? \n')
+    if again.lower().startswith("y"):
+        return True
+    return False
     """
     Determines if the player wants to play again.
 
@@ -62,7 +65,7 @@ def play_again():
     "y". If the value does begin with "y", then return True. Otherwise, return
     False.
     """
-    pass
+    # pass
 
 
 def make_move(board, letter, move):
@@ -72,6 +75,28 @@ def make_move(board, letter, move):
 
 # This function must be completed
 def is_winner(board, letter):
+
+    # horizontal
+    if board[1] == board[2] == board[3] == letter:
+        return True
+    elif board[4] == board[5] == board[6] == letter:
+        return True
+    elif board[7] == board[8] == board[9] == letter:
+        return True
+    # vertical
+    elif board[1] == board[4] == board[7] == letter:
+        return True
+    elif board[2] == board[5] == board[8] == letter:
+        return True
+    elif board[3] == board[6] == board[9] == letter:
+        return True
+    # diagonal
+    elif board[1] == board[5] == board[9] == letter:
+        return True
+    elif board[3] == board[5] == board[7] == letter:
+        return True
+    else:
+        return False
 
     """
     Determines if the specified letter is a winner.
