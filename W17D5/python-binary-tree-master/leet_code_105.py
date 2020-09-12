@@ -4,12 +4,17 @@ https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-tr
 """
 from tree_node import TreeNode
 
-def buildTree(preorder, inorder):
-  """
-  :type preorder: List[int]
-  :type inorder: List[int]
-  :rtype: TreeNode
-  """
+def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        if not preorder or not inorder:
+            return
+        rootVal = preorder.pop(0)
+        root = TreeNode(rootVal)
+        index = inorder.index(rootVal)
+        leftIn = inorder[:index]
+        rightIn = inorder[index +1:]
+        root.left = self.buildTree(preorder, leftIn)
+        root.right = self.buildTree(preorder, rightIn)
+        return root
 
 preorder_tree_values = [3,9,20,15,7]
 inorder_tree_values = [9,3,15,20,7]
