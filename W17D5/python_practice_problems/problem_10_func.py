@@ -1,34 +1,42 @@
 #  Write a function "comparison" that takes in a single parameter, a function.
-# 
-#  "comparison" will return another function that accepts list containing 2 
-#     numbers. 
-# 
-#  Each of these numbers will be invoked on the original function recieved as 
+#
+#  "comparison" will return another function that accepts list containing 2
+#     numbers.
+#
+#  Each of these numbers will be invoked on the original function recieved as
 #      an argument by "comparison".
 #
-#  When the numbers are invoked on the original function we will compare the 
+#  When the numbers are invoked on the original function we will compare the
 #     return values:
 #
-#     If the return value of the first number is greater than the return value 
+#     If the return value of the first number is greater than the return value
 #     of the second number:
 #          return 1
 #     If the return value of the first number is less than than the return value
 #     of the second number:
 #          return -1
-#     If the return value of the first number is equal to the return value of 
+#     If the return value of the first number is equal to the return value of
 #     the second number:
 #          return 0
-# 
-# 
-# 
+#
+#
+#
 #  --- YOUR CODE HERE ---
 
-
-
-
-# 
+def comparison(func):
+    def inner(num1, num2):
+        val1 = func(num1)
+        val2 = func(num2)
+        if val1 > val2:
+            return 1
+        if val1 < val2:
+            return -1
+        if val1 == val2:
+            return 0
+    return inner
+#
 #  ------ EXAMPLES ------
-# 
+#
 
 def negation(num):
     return num * -1
