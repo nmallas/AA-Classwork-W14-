@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Package Status</title>
+</head>
+
+<body>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Sender</th>
+        <th>Recipient</th>
+        <th>Origin</th>
+        <th>Destination</th>
+        <th>Express Shipping</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for package in packages %}
+      <tr>
+        <td>{{ package.sender }}</td>
+        <td>{{ package.recipient }}</td>
+        <td>{{ package.origin }}</td>
+        <td>{{ package.destination }}</td>
+        <td>{{ package.express_shipping }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+
+  <a href="{{ url_for('.new_package') }}"><button type="button">New Package</button></a>
+</body>
+
+</html>

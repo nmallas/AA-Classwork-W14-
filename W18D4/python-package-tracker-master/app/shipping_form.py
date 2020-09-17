@@ -3,14 +3,22 @@ from wtforms.fields import (
   StringField, BooleanField, SelectField, SubmitField
 )
 from wtforms.validators import (
-    DataRequired, AnyOf
+    DataRequired
 )
 
 from map.map import map
 
 origin_cities = map.keys()
-destination_cities = map.values()
 
+def cities_list(lst):
+  unique_cities = set()
+  for cities in map.values():
+    for city in cities:
+      unique_cities.add(city)
+  return unique_cities
+
+
+destination_cities = cities_list(map)
 
 class ShippingForm(FlaskForm):
     sender = StringField("Sender Name", [DataRequired()])
