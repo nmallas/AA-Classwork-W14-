@@ -2,6 +2,7 @@
     CODEWARS - Where My Anagrams At?
 """
 
+
 def anagrams(word, words):
 
     def get_chars(word):
@@ -22,3 +23,29 @@ def longest_consec(strarr, k):
         if len(string) > len(maxStr):
             maxStr = string
     return maxStr
+
+"""
+    CODEWARS - Build a pile of cubes
+"""
+
+
+def find_nb(m):
+    current = 1
+    while m > 0:
+        m -= (current ** 3)
+        current += 1
+    return (current - 1) if m == 0 else -1
+
+"""
+    CODEWARS - Write number in expanded form
+"""
+
+
+def expanded_form(num):
+    string_num = str(num)
+    expanded_nums = []
+    for i in range(len(string_num)):
+        char = string_num[i]
+        if char != "0":
+            expanded_nums.append(char + ("0" * (len(string_num) - i - 1)))
+    return " + ".join(expanded_nums)
