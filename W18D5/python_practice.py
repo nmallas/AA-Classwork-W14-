@@ -49,3 +49,15 @@ def expanded_form(num):
         if char != "0":
             expanded_nums.append(char + ("0" * (len(string_num) - i - 1)))
     return " + ".join(expanded_nums)
+
+
+"""
+    CODEWARS - Take a Number And Sum Its Digits Raised To
+    The Consecutive Powers And ....¡Eureka!!
+"""
+
+
+def sum_dig_pow(a, b): # range(a, b + 1) will be studied by the function
+    def eureka(num):
+        return sum([int(x) ** (i + 1) for (i, x) in enumerate(str(num))]) == num
+    return [num for num in range(a, b + 1) if eureka(num)]
