@@ -12,11 +12,30 @@
 # 3. Then it should use alpine package manager to install tini: 'apk add --update tini'
 # 4. Then it should create a new directory for app files using 'mkdir -p /usr/src/app'.
 # 5. Node uses a "package manager", so this Dockerfile will need to copy in the 'package.json'
-# file and put that data in a file with the same name. Make sure this data is 
-# going into the folder you just created. 
+# file and put that data in a file with the same name. Make sure this data is
+# going into the folder you just created.
 # 6. Then it needs to run 'npm install' to install dependencies from that file
 # 7. To keep it clean and small, run 'npm cache clean --force' after above
 # 8. Then it needs to copy in all files from current directory
 # 9. Then it needs to start container with command 'tini -- node ./bin/www'.
-# Lookup the CMD syntax if you need a reminder. 
+# Lookup the CMD syntax if you need a reminder.
 # In the end you should be using FROM, RUN, WORKDIR, COPY, EXPOSE, and CMD commands.
+
+
+FROM node:12.18-alpine3.10
+
+EXPOSE 3000
+
+RUN ["apk", "add", "--update", "tini"]
+
+WORKDIR /usr/src/app
+
+COPY package.json package.json
+
+RUN ["npm", "install"]
+
+RUN ["npm", "cache", "clean", "--force"]
+
+COPY . .
+
+CMD ["tini", "--", "node", "./bin/www"]
