@@ -48,3 +48,15 @@ var addBinary = function(a, b) {
     if(carry) newBString.push(1)
     return newBString.reverse().join("")
 };
+
+
+// Problem 198
+var rob = function(nums) {
+    if(!nums.length) return 0;
+    for(let i=0; i<nums.length; i++) {
+        let currentVal = nums[i] + (nums[i-2] || 0);
+        let currentMax = Math.max(currentVal, (nums[i-1] || 0));
+        nums[i] = currentMax;
+    }
+    return Math.max(...nums)
+};
