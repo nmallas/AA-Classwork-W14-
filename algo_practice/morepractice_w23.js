@@ -26,3 +26,27 @@ var twoSum = function(numbers, target) {
         }
     }
 };
+
+
+// create a function taking in array and target
+// create an empty set
+// iterate over the array
+// check if the set has target - array[i]
+// if so, return [array[i], target-array[i]]
+// At end of iteration, if values not found, return []
+
+function twoNumberSum(array, targetSum) {
+    let numbers = new Set();
+      let half = targetSum/2;
+      let halfCount = 0;
+      for(let i=0; i<array.length; i++) {
+          if(numbers.has(targetSum - array[i])) {
+              return [array[i], targetSum - array[i]]
+          } else if(array[i] === half) {
+              halfCount++;
+          }
+          if(halfCount === 2) return [half, half]
+          numbers.add(array[i]);
+      }
+      return []
+  }
