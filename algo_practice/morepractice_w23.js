@@ -49,4 +49,22 @@ function twoNumberSum(array, targetSum) {
           numbers.add(array[i]);
       }
       return []
-  }
+}
+
+// Second solution using sorting and pointers
+
+function twoNumberSum(array, targetSum) {
+	array.sort((a,b) => a-b);
+	let left = 0;
+	let right = array.length -1;
+	while(left !== right) {
+		if((array[left] + array[right]) > targetSum) {
+			right--;
+		} else if ((array[left] + array[right]) === targetSum){
+			return [array[left], array[right]]
+		} else {
+			left++;
+		}
+	}
+	return [];
+}
