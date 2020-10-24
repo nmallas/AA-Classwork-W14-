@@ -68,3 +68,56 @@ function twoNumberSum(array, targetSum) {
 	}
 	return [];
 }
+
+
+
+// AlgoExpert smallest difference sol 1
+// solution idea:
+// iterate over array 1
+// compare val to every val in array2
+// keep track of minDiff
+// Time complexity n^2
+// Space Complexity constant
+
+function smallestDifference(arrayOne, arrayTwo) {
+    let minDif = Infinity;
+    let vals = []
+  for(let i=0; i<arrayOne.length; i++) {
+        for(let j=0; j<arrayTwo.length; j++) {
+            let diff = Math.abs(arrayOne[i] - arrayTwo[j]);
+            if(diff < minDif) {
+                minDif = diff;
+                vals = [arrayOne[i], arrayTwo[j]]
+            }
+        }
+    }
+    return vals;
+}
+
+
+// AlgoExpert smallest difference sol 2
+function smallestDifference(arrayOne, arrayTwo) {
+    arrayOne.sort((a, b) => a - b);
+      arrayTwo.sort((a, b) => a - b);
+      let leftPointer = 0;
+      let rightPointer = 0;
+      let minDiff = Infinity;
+      let currentArr = [];
+      while(leftPointer < arrayOne.length && rightPointer < arrayTwo.length) {
+          let diff = Math.abs(arrayOne[leftPointer] - arrayTwo[rightPointer]);
+          if(diff === 0) {
+               return [arrayOne[leftPointer], arrayTwo[rightPointer]];
+          } else if(diff < minDiff) {
+              minDiff = diff;
+              currentArr = [arrayOne[leftPointer], arrayTwo[rightPointer]];
+          }
+
+          if(arrayOne[leftPointer] < arrayTwo[rightPointer]) {
+              leftPointer++;
+          } else {
+              rightPointer++;
+          }
+
+      }
+      return currentArr;
+  }
