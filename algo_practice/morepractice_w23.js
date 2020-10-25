@@ -121,3 +121,47 @@ function smallestDifference(arrayOne, arrayTwo) {
       }
       return currentArr;
   }
+
+
+
+  class Node {
+    constructor(name) {
+      this.name = name;
+      this.children = [];
+    }
+
+    addChild(name) {
+      this.children.push(new Node(name));
+      return this;
+    }
+
+      // use an array to hold values to search
+      // shift off first val of array
+      // if there are children for current val
+      // iterate backwards and add children to array
+      // continue until finished
+      // time complexity O(n) space: O(n)
+
+      // bad solution
+
+    // depthFirstSearch(array) {
+    //       array.push(this.name)
+    //   let toSearch = [...this.children];
+    //       while(toSearch.length) {
+    //               let node = toSearch.shift();
+    //               array.push(node.name);
+    //               for(let i=node.children.length -1; i>=0; i--) {
+    //                   toSearch.unshift(node.children[i])
+    //               }
+    //       }
+    //       return array;
+//   }
+
+
+    // good solution
+    depthFirstSearch(array, current=this) {
+        array.push(current.name);
+            current.children.forEach(child => this.depthFirstSearch(array, child))
+            return array
+    }
+}
