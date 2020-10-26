@@ -159,9 +159,58 @@ function smallestDifference(arrayOne, arrayTwo) {
 
 
     // good solution
+    // Time complexity O(V + E)
+    // Space Complexity O(V)
     depthFirstSearch(array, current=this) {
         array.push(current.name);
             current.children.forEach(child => this.depthFirstSearch(array, child))
             return array
     }
 }
+
+
+// create a new rewards array
+// Find any index that is not surrounded by lower vals
+// Set all of those vals to 1
+// From each of those vals, iterate left & right
+// if next val is higher, Math.max(val, current + 1)
+// if next val is lower and not 0, Math.min(val, current -1)
+// [2, 3, 4, 3, 1, 3, 6, 7, 9, 5, 4]
+// [1, 2, 3, 2, 1, 2, 3, 4, 5, 2, 1]
+
+
+function minRewards(scores) {
+    let rewards = new Array(scores.length).fill(0);
+      let smallest = []
+      for(let i=0; i<scores.length; i++) {
+          let prev = scores[i-1] || Infinity;
+          let current = scores[i];
+          let next = scores[i+1] || Infinity;
+          if(current<prev && current<next) {
+              rewards[i] = 1;
+              smallest.push(i);
+          }
+      }
+      while(smallest.length) {
+          let idx = smallest.shift();
+          for(let i=idx; i>0; i--) {
+              if(scores[i-1] && scores[i-1] > scores[i]) {
+                  rewards[i-1] = Math.max(rewards[i-1], rewards[i] + 1)
+              } else if(scores[i-1] && scores[i-1] < scores[i]) {
+                  rewards[i-1] = rewards[i-1] === 0 ? rewards[i] - 1 :
+                                               rewards[i-1] === 1 ? 1 :
+                                               Math.min(rewards[i-1], rewards[i] - 1)
+              }
+          }
+          for(let i=idx; i<scores.length -1; i++) {
+              if(scores[i+1] && scores[i+1] > scores[i]) {
+                  rewards[i+1] = Math.max(rewards[i+1], rewards[i] + 1)
+              } else if(scores[i+1] && scores[i+1] < scores[i]) {
+                  rewards[i+1] = rewards[i+1] === 0 ? rewards[i] - 1 :
+                                               rewards[i+1] === 1 ? 1 :
+                                               Math.min(rewards[i+1], rewards[i] - 1)
+              }
+          }
+      }
+      return rewards.reduce((sum, num) => sum + num)
+  }
