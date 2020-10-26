@@ -179,38 +179,94 @@ function smallestDifference(arrayOne, arrayTwo) {
 // [1, 2, 3, 2, 1, 2, 3, 4, 5, 2, 1]
 
 
+// function minRewards(scores) {
+//     let rewards = new Array(scores.length).fill(0);
+//       let smallest = []
+//       for(let i=0; i<scores.length; i++) {
+//           let prev = scores[i-1] || Infinity;
+//           let current = scores[i];
+//           let next = scores[i+1] || Infinity;
+//           if(current<prev && current<next) {
+//               rewards[i] = 1;
+//               smallest.push(i);
+//           }
+//       }
+//       while(smallest.length) {
+//           let idx = smallest.shift();
+//           for(let i=idx; i>0; i--) {
+//               if(scores[i-1] && scores[i-1] > scores[i]) {
+//                   rewards[i-1] = Math.max(rewards[i-1], rewards[i] + 1)
+//               } else if(scores[i-1] && scores[i-1] < scores[i]) {
+//                   rewards[i-1] = rewards[i-1] === 0 ? rewards[i] - 1 :
+//                                                rewards[i-1] === 1 ? 1 :
+//                                                Math.min(rewards[i-1], rewards[i] - 1)
+//               }
+//           }
+//           for(let i=idx; i<scores.length -1; i++) {
+//               if(scores[i+1] && scores[i+1] > scores[i]) {
+//                   rewards[i+1] = Math.max(rewards[i+1], rewards[i] + 1)
+//               } else if(scores[i+1] && scores[i+1] < scores[i]) {
+//                   rewards[i+1] = rewards[i+1] === 0 ? rewards[i] - 1 :
+//                                                rewards[i+1] === 1 ? 1 :
+//                                                Math.min(rewards[i+1], rewards[i] - 1)
+//               }
+//           }
+//       }
+//       return rewards.reduce((sum, num) => sum + num)
+//   }
+
+
+// slightly better
+// Time complexity O(n) => first find local mins, then only iterate through array once
+// Space Complexity O(n)
+// function minRewards(scores) {
+//     let rewards = new Array(scores.length).fill(0);
+//       let smallest = []
+//       for(let i=0; i<scores.length; i++) {
+//           let prev = scores[i-1] || Infinity;
+//           let current = scores[i];
+//           let next = scores[i+1] || Infinity;
+//           if(current<prev && current<next) {
+//               rewards[i] = 1;
+//               smallest.push(i);
+//           }
+//       }
+//       while(smallest.length) {
+//           let idx = smallest.shift();
+//           for(let i=idx; i>0; i--) {
+//               let current = scores[i];
+//               let next = scores[i-1] || -Infinity;
+//               if(next > current) {
+//                   rewards[i - 1] = Math.max(rewards[i-1], rewards[i] + 1)
+//               }
+//           }
+//           for(let i=idx; i<scores.length; i++) {
+//               let current = scores[i];
+//               let next = scores[i+1] || -Infinity;
+//               if(next > current) {
+//                   rewards[i + 1] = Math.max(rewards[i+1], rewards[i] + 1)
+//               }
+//           }
+//       }
+//       return rewards.reduce((sum, num) => sum + num)
+//   }
+
+
+
+// best solution
+// time complexity O(n)
+// space complexity O(n)
 function minRewards(scores) {
-    let rewards = new Array(scores.length).fill(0);
-      let smallest = []
-      for(let i=0; i<scores.length; i++) {
-          let prev = scores[i-1] || Infinity;
-          let current = scores[i];
-          let next = scores[i+1] || Infinity;
-          if(current<prev && current<next) {
-              rewards[i] = 1;
-              smallest.push(i);
-          }
-      }
-      while(smallest.length) {
-          let idx = smallest.shift();
-          for(let i=idx; i>0; i--) {
-              if(scores[i-1] && scores[i-1] > scores[i]) {
-                  rewards[i-1] = Math.max(rewards[i-1], rewards[i] + 1)
-              } else if(scores[i-1] && scores[i-1] < scores[i]) {
-                  rewards[i-1] = rewards[i-1] === 0 ? rewards[i] - 1 :
-                                               rewards[i-1] === 1 ? 1 :
-                                               Math.min(rewards[i-1], rewards[i] - 1)
-              }
-          }
-          for(let i=idx; i<scores.length -1; i++) {
-              if(scores[i+1] && scores[i+1] > scores[i]) {
-                  rewards[i+1] = Math.max(rewards[i+1], rewards[i] + 1)
-              } else if(scores[i+1] && scores[i+1] < scores[i]) {
-                  rewards[i+1] = rewards[i+1] === 0 ? rewards[i] - 1 :
-                                               rewards[i+1] === 1 ? 1 :
-                                               Math.min(rewards[i+1], rewards[i] - 1)
-              }
-          }
-      }
-      return rewards.reduce((sum, num) => sum + num)
-  }
+	let rewards = new Array(scores.length).fill(1);
+  for(let i=1; i<scores.length; i++) {
+		if(scores[i] > scores[i-1]) {
+			rewards[i] = rewards[i-1] + 1;
+		}
+	}
+	for(let i=scores.length -2; i>=0; i--) {
+		if(scores[i] > scores[i+1]) {
+			rewards[i] = Math.max(rewards[i], rewards[i+1] + 1);
+		}
+	}
+	return rewards.reduce((sum, num) => sum + num)
+}
