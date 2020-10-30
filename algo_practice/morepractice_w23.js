@@ -270,3 +270,18 @@ function minRewards(scores) {
 	}
 	return rewards.reduce((sum, num) => sum + num)
 }
+
+
+// trailing zeroes
+
+var trailingZeroes = function(n) {
+    let zeroes = 0;
+    let fivePower = 1;
+    let current = 5;
+    while(current <= n) {
+        zeroes += Math.floor(n/current);
+        fivePower++;
+        current = 5 ** fivePower;
+    }
+    return zeroes;
+};
