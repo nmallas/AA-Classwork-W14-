@@ -285,3 +285,71 @@ var trailingZeroes = function(n) {
     }
     return zeroes;
 };
+
+
+// spiral algoexpert
+// solution 1
+
+// create a result array
+// while array.length
+// result array.push(...array.shift())
+// iterate through outer array
+// array.push(popped inner vals)
+// iterate backwards through last inner push vals then pop array
+// iterate backwards through outer array shift vals
+// time complexity O(n*m)
+// space complexity O(n*m)
+
+// function spiralTraverse(array) {
+// 	let result = [];
+//   while(array.length) {
+// 		result.push(...array.shift());
+// 		for(let i=0; i<array.length; i++) {
+// 			result.push(array[i].pop());
+// 			if(array[i].length === 0) {
+// 				array.splice(i, 1);
+// 			}
+// 		}
+// 		if(array[array.length - 1]?.length) {
+// 			for(let i=array[array.length - 1].length - 1; i>=0; i--) {
+// 				result.push(array[array.length-1][i]);
+// 			}
+// 			array.pop()
+// 		}
+// 		for(let i=array.length - 1; i>=0; i--) {
+// 			result.push(array[i].shift());
+// 			if(array[i].length === 0) {
+// 					array.splice(i, 1);
+// 				}
+// 		}
+// 	}
+// 	return result;
+
+// solution 2
+
+function spiralTraverse(array, sc=0, ec=array[0].length -1, sr=0, er=array.length-1) {
+	let result = [];
+  if(sr > er || sc > ec) {
+		return result;
+	}
+	for(let i=sc; i<=ec; i++) {
+		result.push(array[sr][i])
+	}
+
+	for(let i=sr+1; i<=er; i++) {
+		result.push(array[i][ec])
+	}
+
+	for(let i=ec-1; i>=sc; i--) {
+		if(sr === er) break;
+		result.push(array[er][i])
+	}
+
+	for(let i=er-1; i>=sr+1; i--) {
+		if(sc === ec) break;
+		result.push(array[i][sc])
+	}
+
+	return result.concat(spiralTraverse(array, sc+1, ec-1, sr+1, er-1));
+
+}
