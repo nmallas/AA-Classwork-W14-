@@ -353,3 +353,22 @@ function spiralTraverse(array, sc=0, ec=array[0].length -1, sr=0, er=array.lengt
 	return result.concat(spiralTraverse(array, sc+1, ec-1, sr+1, er-1));
 
 }
+
+// validate subsequence algoExpert
+
+// question => are all numbers in the array unique? No
+// question => are all inputs valid? Yes
+// set sequencePointer to 0;
+// iterate over array
+// if array[i] = sequence[sequencePointer] increment pointer
+// return sequencePointer = sequence.length;
+// time complexity O(n)
+// space complexity O(1)
+
+function isValidSubsequence(array, sequence) {
+    let pointer = 0;
+      for(let i=0; i<array.length; i++) {
+          if(array[i] === sequence[pointer]) pointer++;
+      }
+      return pointer === sequence.length;
+  }
