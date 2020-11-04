@@ -20,3 +20,15 @@ class Solution:
                 return False
 
         return True
+
+
+# leetcode 53
+
+
+# Time Complexity O(n)
+# Space Complexity O(1)
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        for i in range(1, len(nums)):
+            nums[i] = max(nums[i], nums[i] + nums[i-1])
+        return max(nums)
