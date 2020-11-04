@@ -32,3 +32,21 @@ class Solution:
         for i in range(1, len(nums)):
             nums[i] = max(nums[i], nums[i] + nums[i-1])
         return max(nums)
+
+
+# leetcode 83
+
+#Time complexity O(n)
+# Space Complexity O(1)
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        current = head;
+        next = head.next if head else None
+        while(current and next):
+            while(next and current.val == next.val):
+                next = next.next
+            current.next = next
+            current = next
+            if current:
+                next = current.next
+        return head
