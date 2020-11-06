@@ -65,3 +65,53 @@ function sameBsts(arrOne, arrTwo) {
 
     return sameBsts(arr1LeftVals, arr2LeftVals) && sameBsts(arr1RightVals, arr2RightVals)
 }
+
+
+// Algo expert move to end
+
+// set firstMatchingIndex = array.indexOf(toMove);
+// iterate through array starting at index 1
+// if el not equal to toMove val
+// swap with firstMatchingIndex
+// increment firstMatchingIndex
+// [0, 1, 3, 2, 2, 2, 4, 2]
+// 2
+// [1, 3, 4, 2, 2, 2, 2, 2]
+// time complexity --> O(n)
+// space complexity --> O(1)
+
+
+function moveElementToEnd(array, toMove) {
+    let firstMatchingIndex = array.indexOf(toMove);
+      if(firstMatchingIndex < 0) return array;
+      for(let i=firstMatchingIndex + 1; i<array.length; i++) {
+          if(array[i] !== toMove) {
+              [array[firstMatchingIndex], array[i]] = [array[i], array[firstMatchingIndex]];
+              firstMatchingIndex++;
+          }
+      }
+      return array;
+  }
+
+
+// solution 2
+// function moveElementToEnd(array, toMove) {
+//     let left = 0;
+//       let right = array.length -1;
+//       while(left < right) {
+
+//           while(array[right] === toMove) {
+//               right--;
+//           }
+
+//           if(array[left] === toMove && left < right) {
+//               array[left] = array[right];
+//               array[right] = toMove;
+//               left++;
+//               right--;
+//           } else {
+//               left++;
+//           }
+//       }
+//       return array
+//   }
