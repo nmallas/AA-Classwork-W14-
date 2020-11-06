@@ -36,11 +36,11 @@ class Solution:
 
 # leetcode 83
 
-#Time complexity O(n)
+# Time complexity O(n)
 # Space Complexity O(1)
 class Solution:
     def deleteDuplicates(self, head: ListNode) -> ListNode:
-        current = head;
+        current = head
         next = head.next if head else None
         while(current and next):
             while(next and current.val == next.val):
@@ -50,3 +50,24 @@ class Solution:
             if current:
                 next = current.next
         return head
+
+# Leetcode 153 Medium
+
+# iterate through list length -1 since we're looking at next val
+# create a variable next and current
+# If next < current return next
+# If we iterated through and didn't return anything, return list[0]
+# ex: [1,2,3,4,5]
+# Time complexity - O(n)
+# Space complexity - O(1)
+
+
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        for i in range(len(nums) - 1):
+            current = nums[i]
+            next = nums[i+1]
+            if(next < current):
+                return next
+
+        return nums[0]
