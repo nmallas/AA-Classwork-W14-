@@ -115,3 +115,23 @@ function moveElementToEnd(array, toMove) {
 //       }
 //       return array
 //   }
+
+
+// Leetcode 617
+// Time complexity O(v+e);
+// Space complexity O(v) worst case ?
+
+var mergeTrees = function(t1, t2) {
+    if(!t1 && !t2) return null;
+    if(t1) {
+        if(t2) {
+            t1.val = t1.val + t2.val;
+            t1.left = mergeTrees(t1.left, t2.left);
+            t1.right = mergeTrees(t1.right, t2.right);
+        }
+
+    } else {
+        return t2;
+    }
+    return t1;
+};
