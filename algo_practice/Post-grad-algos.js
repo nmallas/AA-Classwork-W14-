@@ -135,3 +135,26 @@ var mergeTrees = function(t1, t2) {
     }
     return t1;
 };
+
+
+// AlgoExpert ProductSum
+// Iterate through array, if int add to sum, else
+	// add productSum(array, depth+1)
+// initialize sum = 0
+// array.forEach(num => {
+// if Array.isArray(num) => sum += productSum(array, depth=1)
+// else sum += num;
+// return sum * depth;
+// Time complexity O(n) number of numbers
+// Space complexity O(d) max depth of arrays
+function productSum(array, depth=1) {
+    let sum = 0;
+      array.forEach(el => {
+          if(Array.isArray(el)) {
+              sum += productSum(el, depth + 1);
+          } else {
+              sum += el;
+          }
+      })
+      return sum * depth;
+  }
