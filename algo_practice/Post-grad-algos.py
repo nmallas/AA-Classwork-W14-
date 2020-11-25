@@ -71,3 +71,34 @@ class Solution:
                 return next
 
         return nums[0]
+
+
+#Leetcode 230
+# recursive depth first search of tree
+# in order traversal -> kth node in count will be kth smallest
+# set count = 0
+# set value = root.val
+# create inOrder traveral helper function
+# base case => if !root return
+# if count > k return
+# if count == k value = root.val
+# inOrderTraversal(root.left)
+# count++
+# inOrderTraversal(root.right)
+# Time complexity O(n) max k
+# Space Complexity O(n) max k
+
+
+class Solution:
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        values = []
+
+        def inOrder(node, values):
+            if node is None or len(values) > k:
+                return
+            inOrder(node.left, values)
+            values.append(node.val)
+            inOrder(node.right, values)
+
+        inOrder(root, values)
+        return values[k-1]
